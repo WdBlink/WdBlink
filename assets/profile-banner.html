@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WdBlink — System Field Index</title>
+  <title>WdBlink — Research Systems</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --chart: #182126;
+      --ink: #071019;
       --paper: #f4f7f8;
-      --muted: #9aabb2;
-      --accent: #f06435;
-      --accent-soft: #ff8a5f;
-      --grid: rgba(154,171,178,.16);
+      --muted: #aab7c1;
+      --signal: #ff5a2a;
+      --signal-hot: #ff9b73;
+      --line: rgba(190, 210, 222, .16);
     }
 
     html, body {
       width: 1440px;
       height: 420px;
       overflow: hidden;
-      background: var(--chart);
+      background: var(--ink);
     }
 
     body {
-      color: var(--paper);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      color: var(--paper);
     }
 
     .banner {
@@ -33,173 +33,155 @@
       isolation: isolate;
       width: 480px;
       height: 140px;
-      overflow: hidden;
       transform: scale(3);
       transform-origin: top left;
-      border-left: 4px solid var(--accent);
-      background: var(--chart);
+      overflow: hidden;
+      padding: 14px 20px 12px;
+      background:
+        linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(128deg, #071019 0%, #0a1420 55%, #101b26 100%);
     }
 
-    .grid {
+    .signal {
       position: absolute;
-      inset: 0;
-      z-index: -2;
-      opacity: .62;
-      background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 20px 20px;
+      z-index: -1;
+      width: 330px;
+      height: 82px;
+      right: -70px;
+      top: 34px;
+      transform: rotate(-14deg) skewX(-12deg);
+      border-radius: 55% 18% 58% 25%;
+      background:
+        radial-gradient(circle at 20% 46%, var(--signal-hot), transparent 29%),
+        linear-gradient(98deg, rgba(255,90,42,.14), var(--signal) 34%, #e44320 78%, rgba(255,90,42,.28));
     }
 
-    .grid::after {
+    .signal::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(24,33,38,.03), rgba(24,33,38,.9) 77%);
+      left: 24px;
+      right: 22px;
+      top: 48%;
+      height: 1px;
+      background: rgba(255,255,255,.72);
     }
 
-    .copy {
-      position: relative;
-      z-index: 2;
-      width: 335px;
-      padding: 16px 18px 13px;
-    }
-
-    .index {
-      color: #d5dddf;
-      font-size: 5.6px;
-      line-height: 1;
-      letter-spacing: .13em;
+    .topline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #dce5ec;
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: .17em;
       text-transform: uppercase;
     }
 
-    .index b { color: var(--accent-soft); font-weight: 500; }
+    .topline::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--signal);
+    }
+
+    .topline .rule {
+      width: 44px;
+      height: 1px;
+      margin-left: 6px;
+      background: rgba(220,229,236,.45);
+    }
+
+    .axes {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      display: grid;
+      grid-template-columns: 18px auto;
+      gap: 3px 8px;
+      color: #c8d2da;
+      font-size: 5.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .axes b { color: var(--signal-hot); }
 
     h1 {
-      margin-top: 16px;
-      font-size: 30px;
-      line-height: .9;
-      font-weight: 500;
-      letter-spacing: -.07em;
+      margin-top: 22px;
+      color: var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 43px;
+      line-height: .82;
+      letter-spacing: -.055em;
+      text-shadow: 0 2px 0 rgba(0,0,0,.28);
     }
 
-    .role {
-      margin-top: 10px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 8px;
-      line-height: 1.35;
-      font-weight: 650;
-      letter-spacing: -.01em;
+    .tagline {
+      width: 255px;
+      margin-top: 13px;
+      color: #f0f5f7;
+      font-size: 7.2px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: .02em;
     }
 
-    .thesis {
-      margin-top: 8px;
-      color: #c7d0d3;
-      font-size: 5.7px;
-      line-height: 1.5;
-    }
-
-    .thesis strong { color: #ffffff; font-weight: 500; }
-
-    .plot {
+    .footer {
       position: absolute;
-      inset: 0 0 0 300px;
-      overflow: hidden;
+      left: 20px;
+      bottom: 11px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #b8c4cd;
+      font-size: 5.8px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
     }
 
-    .orbit {
+    .footer::before {
+      content: "";
+      width: 27px;
+      height: 2px;
+      background: var(--signal);
+    }
+
+    .calibration {
       position: absolute;
-      width: 165px;
-      height: 165px;
-      right: -14px;
-      top: -13px;
-      border: 1px solid rgba(198,211,215,.27);
-      border-radius: 50%;
+      right: 22px;
+      bottom: 12px;
+      width: 88px;
+      height: 30px;
+      border-left: 1px solid rgba(220,229,236,.5);
+      border-bottom: 1px solid rgba(220,229,236,.5);
     }
 
-    .orbit::before,
-    .orbit::after {
+    .calibration::before,
+    .calibration::after {
       content: "";
       position: absolute;
-      border: 1px solid rgba(198,211,215,.18);
-      border-radius: 50%;
+      background: rgba(220,229,236,.55);
     }
 
-    .orbit::before { inset: 25px; }
-    .orbit::after { inset: 51px; }
-
-    .route {
-      position: absolute;
-      width: 156px;
-      height: 62px;
-      right: 4px;
-      top: 31px;
-      border-top: 1px solid #ff7a49;
-      border-right: 1px solid #ff7a49;
-      transform: skewY(-16deg) rotate(-5deg);
-    }
-
-    .route::before,
-    .route::after {
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      border: 1px solid var(--accent-soft);
-      background: var(--chart);
-      transform: rotate(45deg);
-    }
-
-    .route::before { left: -3px; top: -3px; }
-    .route::after { right: -3px; bottom: -3px; }
-
-    .crosshair {
-      position: absolute;
-      right: 62px;
-      top: 50px;
-      width: 22px;
-      height: 22px;
-      border: 1px solid rgba(255,138,95,.74);
-      border-radius: 50%;
-    }
-
-    .crosshair::before,
-    .crosshair::after {
-      content: "";
-      position: absolute;
-      background: rgba(255,138,95,.74);
-    }
-
-    .crosshair::before { width: 32px; height: 1px; left: -6px; top: 10px; }
-    .crosshair::after { height: 32px; width: 1px; left: 10px; top: -6px; }
-
-    .code {
-      position: absolute;
-      right: 10px;
-      bottom: 9px;
-      color: var(--muted);
-      font-size: 4.7px;
-      line-height: 1.5;
-      text-align: right;
-      letter-spacing: .09em;
-    }
+    .calibration::before { left: -3px; top: 11px; width: 7px; height: 1px; }
+    .calibration::after { right: 18px; bottom: -3px; width: 1px; height: 7px; }
   </style>
 </head>
 <body>
   <main class="banner">
-    <div class="grid"></div>
-    <div class="copy">
-      <p class="index"><b>R&amp;D / 00</b> &nbsp; system field index &nbsp; 39.9N / 116.4E</p>
-      <h1>WdBlink</h1>
-      <p class="role">agentic R&amp;D systems / autonomous flight / geospatial intelligence</p>
-      <p class="thesis">I build research systems that can run for a long time without becoming a black box.<br><strong>Research should be executable — observable, testable, and recoverable.</strong></p>
+    <div class="signal"></div>
+    <div class="topline">Research systems / field signal <span class="rule"></span> 14</div>
+    <div class="axes">
+      <b>01</b><span>Agentic R&amp;D</span>
+      <b>02</b><span>Autonomous flight</span>
+      <b>03</b><span>Geospatial vision</span>
     </div>
-    <div class="plot" aria-hidden="true">
-      <div class="orbit"></div>
-      <div class="route"></div>
-      <div class="crosshair"></div>
-      <div class="code">OBSERVE / TEST / RECOVER<br>VECTOR 03 · ACTIVE<br>FIELD NOTE 0027</div>
-    </div>
+    <h1>WdBlink</h1>
+    <p class="tagline">Building agentic R&amp;D systems for autonomous flight and geospatial intelligence.</p>
+    <div class="footer">Observable · Testable · Recoverable</div>
+    <div class="calibration"></div>
   </main>
 </body>
 </html>
