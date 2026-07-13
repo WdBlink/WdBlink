@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WdBlink — Research Systems</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #071019;
+      --paper: #f4f7f8;
+      --muted: #aab7c1;
+      --signal: #ff5a2a;
+      --signal-hot: #ff9b73;
+      --line: rgba(190, 210, 222, .16);
+    }
+
+    html, body {
+      width: 1440px;
+      height: 420px;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    body {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      color: var(--paper);
+    }
+
+    .banner {
+      position: relative;
+      isolation: isolate;
+      width: 480px;
+      height: 140px;
+      transform: scale(3);
+      transform-origin: top left;
+      overflow: hidden;
+      padding: 14px 20px 12px;
+      background:
+        linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+        linear-gradient(128deg, #071019 0%, #0a1420 55%, #101b26 100%);
+    }
+
+    .signal {
+      position: absolute;
+      z-index: -1;
+      width: 330px;
+      height: 82px;
+      right: -70px;
+      top: 34px;
+      transform: rotate(-14deg) skewX(-12deg);
+      border-radius: 55% 18% 58% 25%;
+      background:
+        radial-gradient(circle at 20% 46%, var(--signal-hot), transparent 29%),
+        linear-gradient(98deg, rgba(255,90,42,.14), var(--signal) 34%, #e44320 78%, rgba(255,90,42,.28));
+    }
+
+    .signal::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 22px;
+      top: 48%;
+      height: 1px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #dce5ec;
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .topline::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--signal);
+    }
+
+    .topline .rule {
+      width: 44px;
+      height: 1px;
+      margin-left: 6px;
+      background: rgba(220,229,236,.45);
+    }
+
+    .axes {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      display: grid;
+      grid-template-columns: 18px auto;
+      gap: 3px 8px;
+      color: #c8d2da;
+      font-size: 5.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .axes b { color: var(--signal-hot); }
+
+    h1 {
+      margin-top: 22px;
+      color: var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 43px;
+      line-height: .82;
+      letter-spacing: -.055em;
+      text-shadow: 0 2px 0 rgba(0,0,0,.28);
+    }
+
+    .tagline {
+      width: 255px;
+      margin-top: 13px;
+      color: #f0f5f7;
+      font-size: 7.2px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: .02em;
+    }
+
+    .footer {
+      position: absolute;
+      left: 20px;
+      bottom: 11px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #b8c4cd;
+      font-size: 5.8px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .footer::before {
+      content: "";
+      width: 27px;
+      height: 2px;
+      background: var(--signal);
+    }
+
+    .calibration {
+      position: absolute;
+      right: 22px;
+      bottom: 12px;
+      width: 88px;
+      height: 30px;
+      border-left: 1px solid rgba(220,229,236,.5);
+      border-bottom: 1px solid rgba(220,229,236,.5);
+    }
+
+    .calibration::before,
+    .calibration::after {
+      content: "";
+      position: absolute;
+      background: rgba(220,229,236,.55);
+    }
+
+    .calibration::before { left: -3px; top: 11px; width: 7px; height: 1px; }
+    .calibration::after { right: 18px; bottom: -3px; width: 1px; height: 7px; }
+  </style>
+</head>
+<body>
+  <main class="banner">
+    <div class="signal"></div>
+    <div class="topline">Research systems / field signal <span class="rule"></span> 14</div>
+    <div class="axes">
+      <b>01</b><span>Agentic R&amp;D</span>
+      <b>02</b><span>Autonomous flight</span>
+      <b>03</b><span>Geospatial vision</span>
+    </div>
+    <h1>WdBlink</h1>
+    <p class="tagline">Building agentic R&amp;D systems for autonomous flight and geospatial intelligence.</p>
+    <div class="footer">Observable · Testable · Recoverable</div>
+    <div class="calibration"></div>
+  </main>
+</body>
+</html>
